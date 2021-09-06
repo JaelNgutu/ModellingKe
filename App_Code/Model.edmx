@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminDetails">
+          <Key>
+            <PropertyRef Name="adminId" />
+          </Key>
+          <Property Name="adminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="portfolio">
+          <Key>
+            <PropertyRef Name="portfolioID" />
+          </Key>
+          <Property Name="portfolioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="userInfo">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar(max)" />
+          <Property Name="age" Type="nvarchar(max)" />
+          <Property Name="gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="activationLink" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" />
+          <Property Name="photo1" Type="nvarchar(max)" />
+          <Property Name="photo2" Type="nvarchar(max)" />
+          <Property Name="photo3" Type="nvarchar(max)" />
+          <Property Name="photo4" Type="nvarchar(max)" />
+          <Property Name="bio" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="videos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="video" Type="nvarchar(max)" />
+          <Property Name="watch" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__portfolio__userI__6AEFE058">
+          <End Role="userInfo" Type="Self.userInfo" Multiplicity="0..1" />
+          <End Role="portfolio" Type="Self.portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="portfolio">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Login_Admin_Sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Login_Check_Sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="userID_Check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="userID_Check_Sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="fname" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="AdminDetails" EntityType="Self.AdminDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="portfolio" EntityType="Self.portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userInfo" EntityType="Self.userInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="videos" EntityType="Self.videos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__portfolio__userI__6AEFE058" Association="Self.FK__portfolio__userI__6AEFE058">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="portfolio" EntitySet="portfolio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DmkDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="Login_Check_Sp" ReturnType="Collection(DatabaseModel.Login_Check_Sp_Result)">
+          <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="userID_Check_Sp" ReturnType="Collection(DatabaseModel.userID_Check_Sp_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="fname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="userID_Check" ReturnType="Collection(DatabaseModel.userID_Check_Result)">
+          <Parameter Name="uid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="AdminDetails" EntityType="DatabaseModel.AdminDetails" />
+          <EntitySet Name="Events" EntityType="DatabaseModel.Events" />
+          <EntitySet Name="portfolio" EntityType="DatabaseModel.portfolio" />
+          <EntitySet Name="userInfo" EntityType="DatabaseModel.userInfo" />
+          <EntitySet Name="videos" EntityType="DatabaseModel.videos" />
+          <AssociationSet Name="FK__portfolio__userI__6AEFE058" Association="DatabaseModel.FK__portfolio__userI__6AEFE058">
+            <End Role="userInfo" EntitySet="userInfo" />
+            <End Role="portfolio" EntitySet="portfolio" />
+          </AssociationSet>
+          <FunctionImport Name="Login_Admin_Sp" ReturnType="Collection(DatabaseModel.Login_Admin_Sp_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Login_Check_Sp_Result">
+          <Property Type="Int32" Name="userID" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" />
+          <Property Type="String" Name="age" Nullable="true" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="activationLink" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="true" />
+          <Property Type="String" Name="photo1" Nullable="true" />
+          <Property Type="String" Name="photo2" Nullable="true" />
+          <Property Type="String" Name="photo3" Nullable="true" />
+          <Property Type="String" Name="photo4" Nullable="true" />
+          <Property Type="String" Name="bio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="userID_Check_Sp_Result">
+          <Property Type="Int32" Name="userID" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" />
+          <Property Type="String" Name="age" Nullable="true" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="activationLink" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="true" />
+          <Property Type="String" Name="photo1" Nullable="true" />
+          <Property Type="String" Name="photo2" Nullable="true" />
+          <Property Type="String" Name="photo3" Nullable="true" />
+          <Property Type="String" Name="photo4" Nullable="true" />
+          <Property Type="String" Name="bio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="userID_Check_Result">
+          <Property Type="Int32" Name="userID" Nullable="false" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" />
+          <Property Type="String" Name="age" Nullable="true" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="activationLink" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="true" />
+          <Property Type="String" Name="photo1" Nullable="true" />
+          <Property Type="String" Name="photo2" Nullable="true" />
+          <Property Type="String" Name="photo3" Nullable="true" />
+          <Property Type="String" Name="photo4" Nullable="true" />
+          <Property Type="String" Name="bio" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="AdminDetails">
+          <Key>
+            <PropertyRef Name="adminId" />
+          </Key>
+          <Property Name="adminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="portfolio">
+          <Key>
+            <PropertyRef Name="portfolioID" />
+          </Key>
+          <Property Name="portfolioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="userInfo" Relationship="DatabaseModel.FK__portfolio__userI__6AEFE058" FromRole="portfolio" ToRole="userInfo" />
+        </EntityType>
+        <EntityType Name="userInfo">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="activationLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="photo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="photo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="photo3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="photo4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="portfolio" Relationship="DatabaseModel.FK__portfolio__userI__6AEFE058" FromRole="userInfo" ToRole="portfolio" />
+        </EntityType>
+        <EntityType Name="videos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="watch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__portfolio__userI__6AEFE058">
+          <End Type="DatabaseModel.userInfo" Role="userInfo" Multiplicity="0..1" />
+          <End Type="DatabaseModel.portfolio" Role="portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userInfo">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="portfolio">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Login_Admin_Sp_Result">
+          <Property Type="Int32" Name="adminId" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DmkDatabaseEntities">
+          <FunctionImportMapping FunctionImportName="Login_Check_Sp" FunctionName="DatabaseModel.Store.Login_Check_Sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatabaseModel.Login_Check_Sp_Result">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="activationLink" ColumnName="activationLink" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="photo1" ColumnName="photo1" />
+                <ScalarProperty Name="photo2" ColumnName="photo2" />
+                <ScalarProperty Name="photo3" ColumnName="photo3" />
+                <ScalarProperty Name="photo4" ColumnName="photo4" />
+                <ScalarProperty Name="bio" ColumnName="bio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="userID_Check_Sp" FunctionName="DatabaseModel.Store.userID_Check_Sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatabaseModel.userID_Check_Sp_Result">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="activationLink" ColumnName="activationLink" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="photo1" ColumnName="photo1" />
+                <ScalarProperty Name="photo2" ColumnName="photo2" />
+                <ScalarProperty Name="photo3" ColumnName="photo3" />
+                <ScalarProperty Name="photo4" ColumnName="photo4" />
+                <ScalarProperty Name="bio" ColumnName="bio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="userID_Check" FunctionName="DatabaseModel.Store.userID_Check">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatabaseModel.userID_Check_Result">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="activationLink" ColumnName="activationLink" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="photo1" ColumnName="photo1" />
+                <ScalarProperty Name="photo2" ColumnName="photo2" />
+                <ScalarProperty Name="photo3" ColumnName="photo3" />
+                <ScalarProperty Name="photo4" ColumnName="photo4" />
+                <ScalarProperty Name="bio" ColumnName="bio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AdminDetails">
+            <EntityTypeMapping TypeName="DatabaseModel.AdminDetails">
+              <MappingFragment StoreEntitySet="AdminDetails">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="DatabaseModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="portfolio">
+            <EntityTypeMapping TypeName="DatabaseModel.portfolio">
+              <MappingFragment StoreEntitySet="portfolio">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="portfolioID" ColumnName="portfolioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userInfo">
+            <EntityTypeMapping TypeName="DatabaseModel.userInfo">
+              <MappingFragment StoreEntitySet="userInfo">
+                <ScalarProperty Name="bio" ColumnName="bio" />
+                <ScalarProperty Name="photo4" ColumnName="photo4" />
+                <ScalarProperty Name="photo3" ColumnName="photo3" />
+                <ScalarProperty Name="photo2" ColumnName="photo2" />
+                <ScalarProperty Name="photo1" ColumnName="photo1" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="activationLink" ColumnName="activationLink" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="videos">
+            <EntityTypeMapping TypeName="DatabaseModel.videos">
+              <MappingFragment StoreEntitySet="videos">
+                <ScalarProperty Name="watch" ColumnName="watch" />
+                <ScalarProperty Name="video" ColumnName="video" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Login_Admin_Sp" FunctionName="DatabaseModel.Store.Login_Admin_Sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatabaseModel.Login_Admin_Sp_Result">
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

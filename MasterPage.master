@@ -1,0 +1,221 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+  <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Digital Models Kenya</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Digital Models Kenya provides models for fashion shoots, glamour shoots, themed shoots, product advertisement and TV Commercials." />
+	<meta name="keywords" content="Digital Models Kenya, Modellng ,Nairobi,Kenya" />
+	
+
+
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet"/>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/css/animate.css"/>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/css/icomoon.css"/>
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/css/bootstrap.css"/>
+
+<link href="/css/sweetalert.css" rel="stylesheet" />
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="/css/magnific-popup.css"/>
+<link href="/css/login.css" rel="stylesheet" />
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="/css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css"/>
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="/css/style.css"/>
+
+	<!-- Modernizr JS -->
+	<script src="/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+    <div class="fh5co-loader"></div>
+    <form id="form1" runat="server">
+
+        <div id="page">
+	<nav class="fh5co-nav navbar-fixed-top" role="navigation">
+		<div class="top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-right">
+						<p class="num">Call: 0724115517</p>
+						<ul class="fh5co-social">
+							<li><a href="https://www.instagram.com/digitalmodelskenya/" target="_blank"><i class="icon-instagram"></i></a></li>
+							<li><a href="https://www.facebook.com/Digital-Models-Kenya-942743985785249/" target="_blank"><i class="icon-facebook"></i></a></li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="top-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-2">
+						<div id="fh5co-logo"><a href="/Default.aspx">DMK<span>.</span></a></div>
+					</div>
+					<div class="col-xs-10 text-right menu-1">
+						<ul>
+							
+						
+							  <li class="has-dropdown">
+								<a href="/OurModels.aspx">Models</a>
+								<ul class="dropdown">
+									<li><a href="/Models.aspx?type=male">Male</a></li>
+									<li><a href="/Models.aspx?type=female">Female</a></li>
+									<li><a href="/OurModels.aspx">All</a></li>
+								</ul>
+							</li>
+                            	<li><a href="/Event.aspx">Events</a></li>
+							<li><a href="/Portfolio.aspx">Portfolio</a></li>
+                                                        <li ><a href="/Blog.aspx" >Blog</a></li>
+							
+							<li ><a href="/ContactUs.aspx">Contact</a></li>
+                                    
+                             <li class="btn-cta-login" runat="server" id="login" ><a href="/Login.aspx"><span>Login</span></a></li>
+                             <li class="btn-cta-login" runat="server" id="myProf" ><a href="/EditProfile.aspx"><span>MyProfile</span></a></li>     
+                                       <li class="btn-cta-login" runat="server" id="logoutbtn" ><asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn-cta-login" CausesValidation="false" OnClick="LinkButton1_Click"><i class="icon-lock-open"></i>Logout</asp:LinkButton></li> 
+						 <li class="btn-cta" runat="server" id="signupbtn"><a href="/SignUp.aspx"><span>SignUp</span></a></li>
+                           
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</nav>
+
+	
+
+	
+             
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+   
+	
+
+	<div id="fh5co-started" class="fh5co-bg" style="background-image: url(/WebsiteImages/footer.jpg);">
+		<div class="overlay"></div>
+		<div class="container">
+      
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<h2>Interested in becoming one of us? </h2>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<p><a href="/SignUp.aspx" class="btn btn-default btn-lg">Sign Up</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer id="fh5co-footer" class="fh5co-bg"  role="contentinfo">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row row-pb-md" style="text-align:center">
+				<div class="col-md-4 fh5co-widget">
+					<h3>A Little About Digital Models Kenya.</h3>
+					<p style="color:#ffffff">Digital Models Kenya provides models for fashion shoots, glamour shoots, themed shoots, product advertisement and TV Commercials.
+</p>
+                                        <br><p><a class="btn btn-primary" href="SignUp.aspx">Join Now</a></p>
+				</div>
+			
+					
+					<div class="col-md-4 col-sm-4 col-xs-6">
+                        <h3>Quink Links</h3>
+						<ul class="fh5co-footer-links">
+							<li><a href="/Blog.aspx">Blog</a></li>
+							<li><a href="/Event.aspx">Events</a></li>
+							<li><a href="/Models.aspx">Models</a></li>
+							<li><a href="/Portfolio.aspx">Portfolio</a></li>
+							<li><a href="/SignUp.aspx">SignUp</a></li>
+
+						</ul>
+					</div>
+
+					<div class="col-md-4 col-sm-4 col-xs-6">
+                                            <h3>Connect</h3>
+						<ul class="fh5co-footer-links">
+							<li><a href="https://www.instagram.com/digitalmodelskenya/" target="_blank"><i class="icon-instagram"></i> Instagram </a></li>
+							<li><a href="https://www.facebook.com/Digital-Models-Kenya-942743985785249/" target="_blank"><i class="icon-facebook"></i> Facebook</a></li>
+							<li><a href="#"><i class="icon-phone"></i>0724115517 </a></li>
+							<li><a href="#"><i class="icon-message"></i> info@dmk </a></li>
+							
+						</ul>
+					</div>
+
+				
+			
+			</div>
+
+			
+
+		</div>
+	</footer>
+	</div>
+
+   
+    </form>
+
+
+
+
+
+    <div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="/js/jquery.min.js"></script>
+
+   
+	<!-- jQuery Easing -->
+	<script src="/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="/js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="/js/jquery.stellar.min.js"></script>
+	<!-- Carousel -->
+	<script src="/js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="/js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/magnific-popup-options.js"></script>
+
+	<!-- Main -->
+	<script src="/js/main.js"></script>
+</body>
+</html>
